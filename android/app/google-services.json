@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "172818019052",
+    "project_id": "film-flow-30d16",
+    "storage_bucket": "film-flow-30d16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172818019052:android:fd46d4af5d4ea644192bc9",
+        "android_client_info": {
+          "package_name": "com.example.filmflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqiuT79Ct0fkiI2PjdfVkn5FA80VitovA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
