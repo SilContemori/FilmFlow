@@ -1,5 +1,5 @@
 import 'package:filmflow/features/user_auth/firebase_auth_services.dart';
-import 'package:filmflow/features/user_auth/pages/home_page.dart';
+import 'package:filmflow/pages/home_page.dart';
 import 'package:filmflow/features/user_auth/pages/login_page.dart';
 import 'package:filmflow/features/user_auth/pages/verify_email_page.dart';
 import 'package:filmflow/features/user_auth/widget/form_container_widget.dart';

@@ -1,6 +1,7 @@
 import 'package:filmflow/features/app/splash_screen/splash_screen.dart';
 import 'package:filmflow/features/user_auth/pages/login_page.dart';
 import 'package:filmflow/firebase_options.dart';
+import 'package:filmflow/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.dark,
       title: 'Film Flow',
       home: SplashScreen(
-        child: LoginPage(),
+        child: HomePage(), //LoginPage(), //HomePage(),//da rimettere LogIn()
       ),
     );
   }
