@@ -9,43 +9,42 @@ class CaroselTvShows extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
-      itemCount: snapshot.data!.length,
-      options: CarouselOptions(height: 140, viewportFraction: 0.3),
-      // itemBuilder: (context, itemIndex, pageViewIndex) {
-      //   return GestureDetector(
-      //     onTap: () {
-      //       // Navigator.push(
-      //       //   context,
-      //       //   MaterialPageRoute(
-      //       //     builder: (context) => TvShowsPage(
-      //       //       movie: snapshot.data[itemIndex],
-      //       //     ),
-      //       //   ),
-      //       // );
-      //     },
-      //     child: SizedBox(
-      //       height: 50,
-      //       width: 100,
-      //       child: Image.network(
-      //         filterQuality: FilterQuality.high,
-      //         fit: BoxFit.cover,
-      //         '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
-      //       ),
-      //     ),
-      //   );
-      // },
-      itemBuilder: (context, itemIndex, pageViewIndex) {
-        return SizedBox(
-          height: 50,
-          width: 100,
-          child: Image.network(
-            filterQuality: FilterQuality.high,
-            fit: BoxFit.cover,
-            '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
-          ),
-        );
-      }
-    );
+        itemCount: snapshot.data!.length,
+        options: CarouselOptions(height: 140, viewportFraction: 0.3),
+        // itemBuilder: (context, itemIndex, pageViewIndex) {
+        //   return GestureDetector(
+        //     onTap: () {
+        //       // Navigator.push(
+        //       //   context,
+        //       //   MaterialPageRoute(
+        //       //     builder: (context) => TvShowsPage(
+        //       //       movie: snapshot.data[itemIndex],
+        //       //     ),
+        //       //   ),
+        //       // );
+        //     },
+        //     child: SizedBox(
+        //       height: 50,
+        //       width: 100,
+        //       child: Image.network(
+        //         filterQuality: FilterQuality.high,
+        //         fit: BoxFit.cover,
+        //         '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+        //       ),
+        //     ),
+        //   );
+        // },
+        itemBuilder: (context, itemIndex, pageViewIndex) {
+          return SizedBox(
+            height: 50,
+            width: 100,
+            child: Image.network(
+              filterQuality: FilterQuality.high,
+              fit: BoxFit.cover,
+              '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+            ),
+          );
+        });
   }
 }
 

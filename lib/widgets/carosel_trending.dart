@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
-import 'package:filmflow/pages/details_page_trending.dart';
 import 'package:flutter/material.dart';
 
 class CaroselTrending extends StatelessWidget {
@@ -36,28 +35,6 @@ class CaroselTrending extends StatelessWidget {
           ),
         );
       },
-      // itemBuilder: (context, itemIndex, pageViewIndex) {
-      //   return SizedBox(
-      //     height: 50,
-      //     width: 100,
-      //     child: Image.network(
-      //       filterQuality: FilterQuality.high,
-      //       fit: BoxFit.cover,
-      //       '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
-      //     ),
-      //   );
-      // }
     );
   }
 }
-
-
-// return SizedBox(
-        //   height: 50,
-        //   width: 100,
-        //   child: Image.network(
-        //     filterQuality: FilterQuality.high,
-        //     fit: BoxFit.cover,
-        //     '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
-        //   ),
-        // );

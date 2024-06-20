@@ -1,10 +1,8 @@
-import 'package:filmflow/models/cast.dart';
-import 'package:filmflow/models/crew.dart';
-import 'package:filmflow/models/movie_people.dart';
+import 'package:filmflow/models/movie.dart';
 
 class CombinedCredits {
   int? id;
-  List<MoviePeople>? cast;
+  List<Movie>? cast;
 
   CombinedCredits({
     required this.id,
@@ -13,8 +11,8 @@ class CombinedCredits {
 
   factory CombinedCredits.fromJason(Map<String, dynamic> jason) {
     var castFromJason = jason["cast"] as List;
-    List<MoviePeople> castList = castFromJason
-        .map((knownForJson) => MoviePeople.fromJason(knownForJson))
+    List<Movie> castList = castFromJason
+        .map((knownForJson) => Movie.fromJason(knownForJson))
         .toList();
     return CombinedCredits(
       id: jason["id"],

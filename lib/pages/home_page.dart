@@ -8,6 +8,7 @@ import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/carosel_trending.dart';
+import 'package:filmflow/widgets/carosel_tv_shows.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Movie>> trending;
   late Future<List<Movie>> topRatedMovie;
   late Future<List<Movie>> upcomingMovie;
-  late Future<List<TvShows>> topRatedTvShows;
+  late Future<List<Movie>> topRatedTvShows;
   late Future<List<People>> popularPeople;
   @override
   void initState() {
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     trending = Api().getTrending();
     topRatedMovie = Api().getTopRated();
     upcomingMovie = Api().getUpcomingMovie();
-    topRatedTvShows = Api().getTopRatedTvShows();
+    // topRatedTvShows = Api().getTopRatedTvShows();
     popularPeople = Api().getPopularPeople();
   }
 
@@ -148,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 10),
             // const Text(
             //   "Top Rated TV Shows",
             //   style: TextStyle(
@@ -172,7 +173,7 @@ class _HomePageState extends State<HomePage> {
             //     },
             //   ),
             // ),
-            // const SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Text(
               "Popular People",
               style: TextStyle(
