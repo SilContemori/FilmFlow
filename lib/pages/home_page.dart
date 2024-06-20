@@ -1,20 +1,13 @@
 import 'dart:math';
 import 'package:filmflow/api/api.dart';
 import 'package:filmflow/constants.dart';
-import 'package:filmflow/models/genres_movie.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
-import 'package:filmflow/models/trending.dart';
 import 'package:filmflow/models/tv_shows.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
-import 'package:filmflow/pages/details_page_trending.dart';
-import 'package:filmflow/pages/movies_page.dart';
-import 'package:filmflow/pages/people_page.dart';
-import 'package:filmflow/pages/tv_shows_page.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/carosel_trending.dart';
-import 'package:filmflow/widgets/carosel_tv_shows.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Trending>> trending;
+  late Future<List<Movie>> trending;
   late Future<List<Movie>> topRatedMovie;
   late Future<List<Movie>> upcomingMovie;
   late Future<List<TvShows>> topRatedTvShows;
@@ -212,7 +205,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Stack topImage(AsyncSnapshot<List<Trending>> snapshot, int randomIndex) {
+  Stack topImage(AsyncSnapshot<List<Movie>> snapshot, int randomIndex) {
     return Stack(
       children: [
         Opacity(
@@ -239,8 +232,8 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailsPageTrending(
-                    trending: snapshot.data![randomIndex],
+                  builder: (context) => DetailsPageMovie(
+                    movie: snapshot.data![randomIndex],
                   ),
                 ),
               );

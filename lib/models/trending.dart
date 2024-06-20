@@ -11,9 +11,6 @@ class Trending {
   String? backDropPath;
   String? posterPath;
 
-  
-
-
   Trending({
     required this.id,
     required this.title,

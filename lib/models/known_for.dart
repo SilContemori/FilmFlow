@@ -28,7 +28,7 @@ class KnownFor{
     factory KnownFor.fromJason(Map<String, dynamic> jason) {
     return KnownFor(
       backdropPath: jason["backdrop_path"],
-      originalTitle: jason["original_title"],
+      originalTitle: jason["original_title"], // inutile
       overview: jason["overview"],
       posterPath: jason["poster_path"],
       mediaType: jason["media_type"],

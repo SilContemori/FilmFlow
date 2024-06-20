@@ -3,7 +3,7 @@ import 'dart:core';
 class Movie {
   String? title;
   String? backDropPath;
-  String? originalTitle;
+  //String? originalTitle;
   String? overview;
   String? posterPath;
   String? mediaType;
@@ -17,7 +17,7 @@ class Movie {
   Movie({
     required this.title,
     required this.backDropPath,
-    required this.originalTitle,
+    // required this.originalTitle,
     required this.overview,
     required this.posterPath,
     required this.mediaType,
@@ -34,7 +34,7 @@ class Movie {
         title: jason["title"],
         id: jason["id"],
         backDropPath: jason["backdrop_path"],
-        originalTitle: jason["original_title"],
+        // originalTitle: jason["original_title"], /// inutile
         overview: jason["overview"],
         posterPath: jason["poster_path"],
         mediaType: jason["media_type"],

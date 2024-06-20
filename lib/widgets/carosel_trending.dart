@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
+import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:filmflow/pages/details_page_trending.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +19,8 @@ class CaroselTrending extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailsPageTrending(
-                  trending: snapshot.data[itemIndex],
+                builder: (context) => DetailsPageMovie(
+                  movie: snapshot.data[itemIndex],
                 ),
               ),
             );

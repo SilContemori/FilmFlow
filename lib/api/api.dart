@@ -45,12 +45,12 @@ class Api {
     return "$baseUrl/person/$peopleId?api_key=${Constants.apiKey}&&language=en-US&append_to_response=combined_credits";
   }
 
-  Future<List<Trending>> getTrending() async {
+  Future<List<Movie>> getTrending() async {
     final response = await http.get(Uri.parse(trendingUrl));
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
-      List<Trending> listWithNull = decodedData.map((trending) {
-        return Trending.fromJason(trending);
+      List<Movie> listWithNull = decodedData.map((trending) {
+        return Movie.fromJason(trending);
       }).toList();
       return listWithNull.where((element) {
         if (element.title == null ||
