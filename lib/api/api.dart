@@ -7,8 +7,6 @@ import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/movie_videos.dart';
 import 'package:filmflow/models/people.dart';
 import 'package:filmflow/models/people_description.dart';
-import 'package:filmflow/models/trending.dart';
-import 'package:filmflow/models/tv_shows.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,12 +43,12 @@ class Api {
     return "$baseUrl/person/$peopleId?api_key=${Constants.apiKey}&&language=en-US&append_to_response=combined_credits";
   }
 
-  Future<List<Trending>> getTrending() async {
+  Future<List<Movie>> getTrending() async {
     final response = await http.get(Uri.parse(trendingUrl));
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
-      List<Trending> listWithNull = decodedData.map((trending) {
-        return Trending.fromJason(trending);
+      List<Movie> listWithNull = decodedData.map((trending) {
+        return Movie.fromJason(trending);
       }).toList();
       return listWithNull.where((element) {
         if (element.title == null ||
@@ -97,17 +95,17 @@ class Api {
     }
   }
 
-  Future<List<TvShows>> getTopRatedTvShows() async {
-    final response = await http.get(Uri.parse(topRatedTvShows));
-    if (response.statusCode == 200) {
-      final decodedData = json.decode(response.body)['results'] as List;
-      return decodedData.map((tvShows) {
-        return TvShows.fromJason(tvShows);
-      }).toList();
-    } else {
-      throw Exception('Something happend');
-    }
-  }
+  // Future<List<TvShows>> getTopRatedTvShows() async {
+  //   final response = await http.get(Uri.parse(topRatedTvShows));
+  //   if (response.statusCode == 200) {
+  //     final decodedData = json.decode(response.body)['results'] as List;
+  //     return decodedData.map((tvShows) {
+  //       return TvShows.fromJason(tvShows);
+  //     }).toList();
+  //   } else {
+  //     throw Exception('Something happend');
+  //   }
+  // }
 
   Future<List<People>> getPopularPeople() async {
     final response = await http.get(Uri.parse(popularPeople));

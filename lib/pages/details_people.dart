@@ -3,11 +3,8 @@ import 'package:filmflow/api/api.dart';
 import 'package:filmflow/constants.dart';
 import 'package:filmflow/models/combined_credits.dart';
 import 'package:filmflow/models/movie.dart';
-import 'package:filmflow/models/movie_people.dart';
 import 'package:filmflow/models/people_description.dart';
-import 'package:filmflow/models/trending.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
-import 'package:filmflow/pages/details_page_trending.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPeoplePage extends StatefulWidget {
@@ -216,76 +213,65 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
             child: Text(snapshot.error.toString()),
           );
         } else if (snapshot.hasData) {
+          List<Movie> list = snapshot.data.cast.where((elemento) {
+            return elemento.posterPath != null && elemento.title != null;
+          }).toList();
           return CarouselSlider.builder(
-            itemCount: snapshot.data.cast!.length,
+            itemCount: list!.length,
             options: CarouselOptions(
               height: 140,
               viewportFraction: 0.3,
-              enableInfiniteScroll: false,
+              // enableInfiniteScroll: false,
             ),
             itemBuilder: (context, itemIndex, pageViewIndex) {
-              if (itemIndex < snapshot.data.cast.length) {
-                if (snapshot.data.cast[itemIndex].posterPath != null &&
-                    snapshot.data.cast[itemIndex].title != null) {
-                  return GestureDetector(
-                    onTap: () {
-                      debugPrint(
-                          "oggetto------------------------------------${snapshot.data.cast[itemIndex]}");
-
-                      if (snapshot.data.cast[itemIndex] is MoviePeople) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsPageMovie(
-                              movie: snapshot.data.cast[itemIndex],
-                            ),
-                          ),
-                        );
-                      } else if (snapshot.data.cast[itemIndex] is Trending) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsPageTrending(
-                              trending: snapshot.data.cast[itemIndex],
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          height: 150,
-                          width: 100,
-                          child: Image.network(
-                            filterQuality: FilterQuality.high,
-                            fit: BoxFit.cover,
-                            '${Constants.imagePath}${snapshot.data.cast[itemIndex].posterPath}',
-                          ),
-                        ),
-                        Positioned(
-                          left: 2,
-                          right: 2,
-                          top: 116,
-                          bottom: 5,
-                          child: Container(
-                            color: Colors.black,
-                            child: Text(
-                              "${snapshot.data.cast[itemIndex].title}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 11),
-                            ),
-                          ),
-                        ),
-                      ],
+              // if (itemIndex < snapshot.data.cast.length) {
+              //   if (snapshot.data.cast[itemIndex].posterPath != null &&
+              //       snapshot.data.cast[itemIndex].title != null) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsPageMovie(
+                        movie: list[itemIndex],
+                      ),
                     ),
                   );
-                } else {
-                  return SizedBox();
-                }
-              } else {
-                return SizedBox();
-              }
+                },
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: 150,
+                      width: 100,
+                      child: Image.network(
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        '${Constants.imagePath}${list[itemIndex].posterPath}',
+                      ),
+                    ),
+                    Positioned(
+                      left: 2,
+                      right: 2,
+                      top: 116,
+                      bottom: 5,
+                      child: Container(
+                        color: Colors.black,
+                        child: Text(
+                          "${list[itemIndex].title}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 11),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+              //   } else {
+              //     return const SizedBox();
+              //   }
+              // } else {
+              //   return const SizedBox();
+              // }
             },
           );
         } else {

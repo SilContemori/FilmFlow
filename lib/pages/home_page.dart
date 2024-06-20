@@ -1,16 +1,10 @@
 import 'dart:math';
 import 'package:filmflow/api/api.dart';
 import 'package:filmflow/constants.dart';
-import 'package:filmflow/models/genres_movie.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
-import 'package:filmflow/models/trending.dart';
 import 'package:filmflow/models/tv_shows.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
-import 'package:filmflow/pages/details_page_trending.dart';
-import 'package:filmflow/pages/movies_page.dart';
-import 'package:filmflow/pages/people_page.dart';
-import 'package:filmflow/pages/tv_shows_page.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/carosel_trending.dart';
@@ -25,10 +19,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Trending>> trending;
+  late Future<List<Movie>> trending;
   late Future<List<Movie>> topRatedMovie;
   late Future<List<Movie>> upcomingMovie;
-  late Future<List<TvShows>> topRatedTvShows;
+  late Future<List<Movie>> topRatedTvShows;
   late Future<List<People>> popularPeople;
   @override
   void initState() {
@@ -36,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     trending = Api().getTrending();
     topRatedMovie = Api().getTopRated();
     upcomingMovie = Api().getUpcomingMovie();
-    topRatedTvShows = Api().getTopRatedTvShows();
+    // topRatedTvShows = Api().getTopRatedTvShows();
     popularPeople = Api().getPopularPeople();
   }
 
@@ -155,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 10),
             // const Text(
             //   "Top Rated TV Shows",
             //   style: TextStyle(
@@ -179,7 +173,7 @@ class _HomePageState extends State<HomePage> {
             //     },
             //   ),
             // ),
-            // const SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Text(
               "Popular People",
               style: TextStyle(
@@ -212,7 +206,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Stack topImage(AsyncSnapshot<List<Trending>> snapshot, int randomIndex) {
+  Stack topImage(AsyncSnapshot<List<Movie>> snapshot, int randomIndex) {
     return Stack(
       children: [
         Opacity(
@@ -239,8 +233,8 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailsPageTrending(
-                    trending: snapshot.data![randomIndex],
+                  builder: (context) => DetailsPageMovie(
+                    movie: snapshot.data![randomIndex],
                   ),
                 ),
               );

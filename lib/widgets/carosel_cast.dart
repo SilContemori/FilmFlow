@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
+import 'package:filmflow/models/people.dart';
 import 'package:filmflow/pages/details_people.dart';
 import 'package:flutter/material.dart';
 
