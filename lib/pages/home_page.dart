@@ -3,12 +3,11 @@ import 'package:filmflow/api/api.dart';
 import 'package:filmflow/constants.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
-import 'package:filmflow/models/tv_shows.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
+import 'package:filmflow/pages/search_movie_page.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/carosel_trending.dart';
-import 'package:filmflow/widgets/carosel_tv_shows.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -343,40 +342,18 @@ class _HomePageState extends State<HomePage> {
         style: TextStyle(
             color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
       ),
-      actions: [
-        // IconButton(
-        //   icon: const Text(
-        //     "Movies",
-        //     style: TextStyle(fontSize: 11, color: Colors.white),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.push(
-        //         context, MaterialPageRoute(builder: (context) => MoviesPage()));
-        //   },
-        // ),
-        // const SizedBox(width: 10),
-        // IconButton(
-        //   icon: const Text(
-        //     "Tv Shows",
-        //     style: TextStyle(fontSize: 11, color: Colors.white),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.push(context,
-        //         MaterialPageRoute(builder: (context) => TvShowsPage()));
-        //   },
-        // ),
-        // const SizedBox(width: 10),
-        // IconButton(
-        //   icon: const Text(
-        //     "People",
-        //     style: TextStyle(fontSize: 11, color: Colors.white),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.push(
-        //         context, MaterialPageRoute(builder: (context) => PeoplePage()));
-        //   },
-        // ),
-        // const SizedBox(width: 10),
+      actions: <Widget>[
+        IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchMoviePage()),
+              );
+            }),
       ],
     );
   }

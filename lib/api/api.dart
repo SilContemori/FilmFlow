@@ -43,6 +43,10 @@ class Api {
     return "$baseUrl/person/$peopleId?api_key=${Constants.apiKey}&&language=en-US&append_to_response=combined_credits";
   }
 
+  String createUrlSerchMovie(String titleMovie) {
+    return "$baseUrl/search/movie?api_key=${Constants.apiKey}&&query=$titleMovie";
+  }
+
   Future<List<Movie>> getTrending() async {
     final response = await http.get(Uri.parse(trendingUrl));
     if (response.statusCode == 200) {
@@ -240,6 +244,37 @@ class Api {
       PeopleDescription peopleDescription =
           PeopleDescription.fromJason(decodedData);
       return peopleDescription;
+    } else {
+      throw Exception('Something happend');
+    }
+  }
+
+  Future<List<Movie>> getSerchMovie(String url) async {
+    final responce = await http.get(Uri.parse(url));
+    if (responce.statusCode == 200) {
+      final decodedData = json.decode(responce.body)['results'] as List;
+      List<Movie> listWithNull = decodedData.map((list) {
+        return Movie.fromJason(list);
+      }).toList();
+      debugPrint(
+          "$decodedData----------------------------------------------------");
+      debugPrint("list num: ${listWithNull.length}");
+      listWithNull = listWithNull.where((element) {
+        if (element.title == null ||
+            element.overview == null ||
+            element.popularity == null ||
+            element.releaseDate == null ||
+            element.voteAverage == null ||
+            element.voteCount == null ||
+            element.backDropPath == null ||
+            element.posterPath == null) {
+          return false;
+        } else {
+          return true;
+        }
+      }).toList();
+      debugPrint("list num: ${listWithNull.length}");
+      return listWithNull;
     } else {
       throw Exception('Something happend');
     }
