@@ -5,7 +5,9 @@ import 'package:filmflow/models/combined_credits.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people_description.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
+import 'package:filmflow/pages/search_movie_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailsPeoplePage extends StatefulWidget {
   const DetailsPeoplePage({
@@ -38,7 +40,30 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(backgroundColor: Colors.black, body: detailsBody()));
+        child: Scaffold(
+      backgroundColor: Colors.black,
+      body: detailsBody(),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          IconButton(
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SearchMoviePage()),
+                );
+              }),
+        ],
+      ),
+    ));
   }
 
   SingleChildScrollView detailsBody() {
@@ -88,10 +113,13 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   "${snapshot.data!.nome}",
-                                  style: const TextStyle(
-                                      fontSize: 25,
+                                  style: GoogleFonts.ebGaramond(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -103,89 +131,116 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Personal Info",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               "Known for",
-                              style: TextStyle(
-                                  fontSize: 15,
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
-                            const SizedBox(height: 10),
                             Text(
                               "${snapshot.data!.knownForDepartment}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                            const SizedBox(height: 10),
-                            const Text(
-                              "Birthday",
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
                             Text(
+                              "Birthday",
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
                               "${snapshot.data!.birthday}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               "Deathday",
-                              style: TextStyle(
-                                  fontSize: 15,
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
                             Text(
                               deathday.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                            const SizedBox(height: 10),
-                            const Text(
-                              "Place of Birth",
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
+                            Text(
+                              "Place of Birth",
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                             Text(
                               "${snapshot.data!.placeOfBirth}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            ),
-                            const SizedBox(height: 10),
-                            const Text(
-                              "Biography",
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
                             Text(
+                              "Biography",
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
                               biography.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               "KnownFor",
-                              style: TextStyle(
-                                  fontSize: 15,
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -221,12 +276,8 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
             options: CarouselOptions(
               height: 140,
               viewportFraction: 0.3,
-              // enableInfiniteScroll: false,
             ),
             itemBuilder: (context, itemIndex, pageViewIndex) {
-              // if (itemIndex < snapshot.data.cast.length) {
-              //   if (snapshot.data.cast[itemIndex].posterPath != null &&
-              //       snapshot.data.cast[itemIndex].title != null) {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -253,25 +304,25 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
                       left: 2,
                       right: 2,
                       top: 116,
-                      bottom: 5,
+                      bottom: 2,
                       child: Container(
                         color: Colors.black,
-                        child: Text(
-                          "${list[itemIndex].title}",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 11),
+                        child: Center(
+                          child: Text(
+                            "${list[itemIndex].title}",
+                            style: GoogleFonts.ebGaramond(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               );
-              //   } else {
-              //     return const SizedBox();
-              //   }
-              // } else {
-              //   return const SizedBox();
-              // }
             },
           );
         } else {

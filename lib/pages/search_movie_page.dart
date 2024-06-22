@@ -3,7 +3,7 @@ import 'package:filmflow/constants.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchMoviePage extends StatefulWidget {
   const SearchMoviePage({super.key});
@@ -20,8 +20,6 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
   void initState() {
     super.initState();
     String urlSearchMovie = Api().createUrlSerchMovie(searchController.text);
-    debugPrint(
-        "$urlSearchMovie-------------------------------------------------------------------");
     searchMovies = Api().getSerchMovie(urlSearchMovie);
   }
 
@@ -29,7 +27,7 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.transparent,
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -44,9 +42,12 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
                           controller: searchController,
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4))),
+                            borderRadius: BorderRadius.circular(4),
+                          )),
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Colors.transparent),
+                          surfaceTintColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
                           onSubmitted: (value) {
                             searchController.clear();
                           },
@@ -127,8 +128,12 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
                                           width: 160,
                                           child: Text(
                                             "${snapshot.data![index].title}",
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.ebGaramond(
+                                              textStyle: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
                                           ),
                                         )
                                       ],

@@ -9,6 +9,7 @@ import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/carosel_trending.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,12 +78,13 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               "Trending",
-              style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(
               child: FutureBuilder(
@@ -101,12 +103,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               "Top Rated Movies",
-              style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(
               child: FutureBuilder(
@@ -125,12 +128,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               "Upcoming Movies",
-              style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(
               child: FutureBuilder(
@@ -148,37 +152,14 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            // const SizedBox(height: 10),
-            // const Text(
-            //   "Top Rated TV Shows",
-            //   style: TextStyle(
-            //       fontSize: 17,
-            //       color: Colors.white,
-            //       fontWeight: FontWeight.bold),
-            // ),
-            // SizedBox(
-            //   child: FutureBuilder(
-            //     future: topRatedTvShows,
-            //     builder: (context, snapshot) {
-            //       if (snapshot.hasError) {
-            //         return Center(
-            //           child: Text(snapshot.error.toString()),
-            //         );
-            //       } else if (snapshot.hasData) {
-            //         return CaroselTvShows(snapshot: snapshot);
-            //       } else {
-            //         return const Center(child: CircularProgressIndicator());
-            //       }
-            //     },
-            //   ),
-            // ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               "Popular People",
-              style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
             ),
             SizedBox(
               child: FutureBuilder(
@@ -263,32 +244,40 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "${snapshot.data![randomIndex].title} ",
-                  style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                  style: GoogleFonts.ebGaramond(
+                      textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold)),
                 ),
                 Row(
                   children: [
                     Text(
                       "(${DateTime.parse(snapshot.data![randomIndex].releaseDate!).year.toString()})",
-                      style: const TextStyle(fontSize: 7, color: Colors.white),
+                      style: GoogleFonts.ebGaramond(
+                          textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      )),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
                     Container(
-                      width: 30,
-                      height: 30,
+                      width: 35,
+                      height: 35,
                       // color: Colors.yellow,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.green),
                       child: Center(
                         child: Text(
-                          "${snapshot.data![randomIndex].voteAverage!.toInt() * 10}%",
-                          style: const TextStyle(
-                              fontSize: 9, fontWeight: FontWeight.bold),
-                        ),
+                            "${snapshot.data![randomIndex].voteAverage!.toInt() * 10}%",
+                            style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ))),
                       ),
                     ),
                   ],
@@ -303,22 +292,17 @@ class _HomePageState extends State<HomePage> {
                         return Center(child: Text(snapshot.error.toString()));
                       } else if (snapshot.hasData) {
                         return ListView.builder(
-                            scrollDirection: Axis.horizontal,
+                            scrollDirection: Axis.vertical,
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, itexmIndex) {
-                              if (itexmIndex != snapshot.data!.length - 1) {
-                                return Text(
-                                  "${snapshot.data![itexmIndex].name} - ",
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 9),
-                                );
-                              } else {
-                                return Text(
-                                  "${snapshot.data![itexmIndex].name}",
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 9),
-                                );
-                              }
+                              return Text(
+                                  "•  ${snapshot.data![itexmIndex].name}  ",
+                                  style: GoogleFonts.ebGaramond(
+                                      textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                  )));
                             });
                       } else {
                         return const Center(child: CircularProgressIndicator());
@@ -337,10 +321,14 @@ class _HomePageState extends State<HomePage> {
   AppBar appBar() {
     return AppBar(
       backgroundColor: Colors.black,
-      title: const Text(
+      title: Text(
         "Film Flow",
-        style: TextStyle(
-            color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+        style: GoogleFonts.ebGaramond(
+            textStyle: const TextStyle(
+          color: Color.fromARGB(231, 255, 216, 59),
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        )),
       ),
       actions: <Widget>[
         IconButton(
@@ -351,7 +339,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SearchMoviePage()),
+                MaterialPageRoute(
+                    builder: (context) => const SearchMoviePage()),
               );
             }),
       ],
