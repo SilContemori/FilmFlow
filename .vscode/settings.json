@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
         "lib/widtets/carosel.dart"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
 import 'package:filmflow/pages/details_people.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CaroselCrew extends StatelessWidget {
   const CaroselCrew({
@@ -46,13 +47,17 @@ class CaroselCrew extends StatelessWidget {
                           left: 2,
                           right: 2,
                           top: 116,
-                          bottom: 5,
+                          bottom: 0,
                           child: Container(
                             color: Colors.black,
                             child: Text(
                               "${snapshot.data!.crew[itemIndex].originalName}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 11),
+                              style: GoogleFonts.ebGaramond(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -71,13 +76,20 @@ class CaroselCrew extends StatelessWidget {
                       left: 2,
                       right: 2,
                       top: 116,
-                      bottom: 5,
+                      bottom: 0,
                       child: Container(
                         color: Colors.black,
                         child: Text(
                           "${snapshot.data!.crew[itemIndex].originalName}",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 11),
+                          style: GoogleFonts.ebGaramond(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              // fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          // style: const TextStyle(
+                          //     color: Colors.white, fontSize: 11),
                         ),
                       ),
                     )

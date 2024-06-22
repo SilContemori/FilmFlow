@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
-import 'package:filmflow/models/people.dart';
 import 'package:filmflow/pages/details_people.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CaroselCast extends StatelessWidget {
   const CaroselCast({
@@ -47,13 +47,19 @@ class CaroselCast extends StatelessWidget {
                           left: 2,
                           right: 2,
                           top: 116,
-                          bottom: 5,
+                          bottom: 0,
                           child: Container(
                             color: Colors.black,
-                            child: Text(
-                              "${snapshot.data!.cast[itemIndex].originalName}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 11),
+                            child: Center(
+                              child: Text(
+                                "${snapshot.data!.cast[itemIndex].originalName}",
+                                style: GoogleFonts.ebGaramond(
+                                  textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -72,13 +78,17 @@ class CaroselCast extends StatelessWidget {
                       left: 2,
                       right: 2,
                       top: 116,
-                      bottom: 5,
+                      bottom: 0,
                       child: Container(
                         color: Colors.black,
                         child: Text(
                           "${snapshot.data!.cast[itemIndex].originalName}",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 11),
+                          style: GoogleFonts.ebGaramond(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -86,62 +96,6 @@ class CaroselCast extends StatelessWidget {
                 );
               }
             },
-            // itemBuilder: (context, itemIndex, pageViewIndex) {
-            //   if (snapshot.data!.cast[itemIndex].profilePath != null) {
-            //     return Stack(
-            //       children: [
-            //         SizedBox(
-            //           height: 150,
-            //           width: 100,
-            //           child: Image.network(
-            //             filterQuality: FilterQuality.high,
-            //             fit: BoxFit.cover,
-            //             '${Constants.imagePath}${snapshot.data!.cast[itemIndex].profilePath}',
-            //           ),
-            //         ),
-            //         Positioned(
-            //           left: 2,
-            //           right: 2,
-            //           top: 116,
-            //           bottom: 5,
-            //           child: Container(
-            //             color: Colors.black,
-            //             child: Text(
-            //               "${snapshot.data!.cast[itemIndex].originalName}",
-            //               style: const TextStyle(
-            //                   color: Colors.white, fontSize: 11),
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     );
-            //   } else {
-            //     return Stack(
-            //       children: [
-            //         SizedBox(
-            //           height: 100,
-            //           width: 100,
-            //           child: Image.asset(
-            //               'assets/images/Screenshot from 2024-04-30 21-54-17.png'),
-            //         ),
-            //         Positioned(
-            //           left: 2,
-            //           right: 2,
-            //           top: 116,
-            //           bottom: 5,
-            //           child: Container(
-            //             color: Colors.black,
-            //             child: Text(
-            //               "${snapshot.data!.cast[itemIndex].originalName}",
-            //               style: const TextStyle(
-            //                   color: Colors.white, fontSize: 11),
-            //             ),
-            //           ),
-            //         )
-            //       ],
-            //     );
-            //   }
-            // },
           ),
         ],
       ),

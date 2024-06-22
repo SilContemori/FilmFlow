@@ -4,11 +4,13 @@ import 'package:filmflow/models/credits.dart';
 import 'package:filmflow/models/genres_movie.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/movie_videos.dart';
+import 'package:filmflow/pages/search_movie_page.dart';
 import 'package:filmflow/widgets/carosel_cast.dart';
 import 'package:filmflow/widgets/carosel_crew.dart';
 import 'package:filmflow/widgets/error_container.dart';
 import 'package:filmflow/widgets/trailer_movie.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailsPageMovie extends StatefulWidget {
   const DetailsPageMovie({super.key, required this.movie});
@@ -45,6 +47,26 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: detailsBody(),
+        appBar: AppBar(
+          leading: const BackButton(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.transparent,
+          actions: <Widget>[
+            IconButton(
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchMoviePage()),
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }
@@ -59,48 +81,69 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
           children: [
             topImage(),
             const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Overview",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "${currentMovie.overview}",
-                style: const TextStyle(fontSize: 15, color: Colors.white),
+                style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Cast",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             castCotainer(),
             const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Crew",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             crewCotainer(),
             const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Trailer",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.ebGaramond(
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Padding(
@@ -117,7 +160,15 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
                       );
                     } else if (snapshot.hasData) {
                       if (snapshot.data!.isEmpty) {
-                        return const Text("Non ci sono trailer disponibili");
+                        return Text(
+                          "Non ci sono trailer disponibili",
+                          style: GoogleFonts.ebGaramond(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        );
                       } else {
                         return TrailerMovie(
                           snapshot: snapshot,
@@ -218,32 +269,43 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
               children: [
                 Text(
                   "${currentMovie.title} ",
-                  style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                  style: GoogleFonts.ebGaramond(
+                    textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "(${movieYear.year.toString()})",
-                      style: const TextStyle(fontSize: 9, color: Colors.white),
+                      style: GoogleFonts.ebGaramond(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
                     Container(
-                      width: 30,
-                      height: 30,
-                      // color: Colors.yellow,
+                      width: 35,
+                      height: 35,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.green),
                       child: Center(
                         child: Text(
                           "${currentMovie.voteAverage!.toInt() * 10}%",
-                          style: const TextStyle(
-                              fontSize: 9, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.ebGaramond(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -260,22 +322,19 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
                         return Center(child: Text(snapshot.error.toString()));
                       } else if (snapshot.hasData) {
                         return ListView.builder(
-                            scrollDirection: Axis.horizontal,
+                            scrollDirection: Axis.vertical,
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, itexmIndex) {
-                              if (itexmIndex != snapshot.data!.length - 1) {
-                                return Text(
-                                  "${snapshot.data![itexmIndex].name} - ",
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 9),
-                                );
-                              } else {
-                                return Text(
-                                  "${snapshot.data![itexmIndex].name}",
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 9),
-                                );
-                              }
+                              return Text(
+                                "•  ${snapshot.data![itexmIndex].name}  ",
+                                style: GoogleFonts.ebGaramond(
+                                  textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              );
                             });
                       } else {
                         return const Center(child: CircularProgressIndicator());
@@ -283,16 +342,6 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
                     },
                   ),
                 ),
-                // SizedBox(
-                //   height: 70,
-                //   child: SingleChildScrollView(
-                //     child: Text(
-                //       "${currentMovie.overview}",
-                //       style: const TextStyle(fontSize: 9, color: Colors.white),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 20)
               ],
             ),
           ),
