@@ -16,7 +16,6 @@ class CaroselMovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("lenght -----:  ${listMovies.length}");
     return CarouselSlider.builder(
       itemCount: listMovies.length,
       options: CarouselOptions(

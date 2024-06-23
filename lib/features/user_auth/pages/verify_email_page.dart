@@ -76,7 +76,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    //color: Colors.red,
+          
                     height: 150,
                     width: 250,
                     decoration: BoxDecoration(

@@ -15,7 +15,6 @@ class SearchMoviePage extends StatefulWidget {
 class _SearchMoviePageState extends State<SearchMoviePage> {
   late Future<List<Movie>> searchMovies;
   final TextEditingController searchController = TextEditingController();
-  // String input = "dune";
   @override
   void initState() {
     super.initState();
@@ -87,7 +86,6 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
                       return const Center(child: CircularProgressIndicator());
                     }
                     if (snapshot.hasData) {
-                      debugPrint("list : ${snapshot.data!.length}");
                       return Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

@@ -18,7 +18,6 @@ class WatchlistProvider extends ChangeNotifier {
   Future<void> removeMovieFromWatchlist(Movie movie) async {
     List<Movie> newList = [];
     for (Movie movieElem in watchlist) {
-      debugPrint("elem id : ${movieElem.id}");
       if (movieElem.id != movie.id) {
         newList.add(movieElem);
       }

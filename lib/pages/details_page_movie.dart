@@ -266,7 +266,6 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
           child: SizedBox(
             height: 90,
             width: 200,
-            // color: Colors.yellow,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -281,7 +280,6 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
                   ),
                 ),
                 Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "(${movieYear.year.toString()})",

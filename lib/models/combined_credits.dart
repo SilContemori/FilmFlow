@@ -12,7 +12,7 @@ class CombinedCredits {
   factory CombinedCredits.fromJason(Map<String, dynamic> jason) {
     var castFromJason = jason["cast"] as List;
     List<Movie> castList = castFromJason
-        .map((knownForJson) => Movie.fromJason(knownForJson))
+        .map((knownForJson) => Movie.fromJson(knownForJson))
         .toList();
     return CombinedCredits(
       id: jason["id"],

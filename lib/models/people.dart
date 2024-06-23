@@ -21,7 +21,7 @@ class People {
   factory People.fromJason(Map<String, dynamic> jason) {
     var knownForFromJason = jason["known_for"] as List;
     List<Movie> knownForList = knownForFromJason
-        .map((knownForJson) => Movie.fromJason(knownForJson))
+        .map((knownForJson) => Movie.fromJson(knownForJson))
         .toList();
     return People(
       knownForDepartment: jason["known_for_department"],

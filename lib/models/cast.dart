@@ -6,8 +6,7 @@ class Cast {
   String? profilePath;
   String? character;
   String? creditId;
-  // String? posterPath;
-  // String? title;
+
   int id;
 
   Cast({
@@ -19,8 +18,6 @@ class Cast {
     required this.character,
     required this.creditId,
     required this.id,
-    // required this.posterPath,
-    // required this.title,
   });
 
   factory Cast.fromJason(Map<String, dynamic> jason) {
@@ -33,8 +30,6 @@ class Cast {
       profilePath: jason["profile_path"],
       character: jason["character"],
       creditId: jason["credit_id"],
-      // posterPath: jason["poster_path"],
-      // title: jason["title"],
     );
   }
 }
