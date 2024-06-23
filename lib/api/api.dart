@@ -57,12 +57,9 @@ class Api {
       return listWithNull.where((element) {
         if (element.title == null ||
             element.overview == null ||
-            element.mediaType == null ||
-            element.originalLanguage == null ||
             element.popularity == null ||
             element.releaseDate == null ||
             element.voteAverage == null ||
-            element.voteCount == null ||
             element.backDropPath == null ||
             element.posterPath == null) {
           return false;
@@ -265,7 +262,6 @@ class Api {
             element.popularity == null ||
             element.releaseDate == null ||
             element.voteAverage == null ||
-            element.voteCount == null ||
             element.backDropPath == null ||
             element.posterPath == null) {
           return false;

@@ -5,11 +5,13 @@ import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:filmflow/pages/search_movie_page.dart';
+import 'package:filmflow/provider/wathist_provider.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
-import 'package:filmflow/widgets/carosel_trending.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,13 +26,17 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Movie>> upcomingMovie;
   late Future<List<Movie>> topRatedTvShows;
   late Future<List<People>> popularPeople;
+
+  void triggerSetState() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     trending = Api().getTrending();
     topRatedMovie = Api().getTopRated();
     upcomingMovie = Api().getUpcomingMovie();
-    // topRatedTvShows = Api().getTopRatedTvShows();
     popularPeople = Api().getPopularPeople();
   }
 
@@ -78,6 +84,39 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
+            FutureBuilder(
+              future:
+                  context.read<WatchlistProvider>().setWatchlistFromStorage(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                List<Movie> watchlist =
+                    context.watch<WatchlistProvider>().watchlist;
+                if (watchlist.isEmpty) {
+                  return const SizedBox();
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "My Watchlist",
+                      style: GoogleFonts.ebGaramond(
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(
+                        child: CaroselMovies(
+                            listMovies: watchlist, canAutoRepeat: false)),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               "Trending",
               style: GoogleFonts.ebGaramond(
@@ -95,7 +134,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(snapshot.error.toString()),
                     );
                   } else if (snapshot.hasData) {
-                    return CaroselTrending(snapshot: snapshot);
+                    return CaroselMovies(
+                      listMovies: snapshot.data ?? [],
+                    );
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
@@ -120,7 +161,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(snapshot.error.toString()),
                     );
                   } else if (snapshot.hasData) {
-                    return CaroselMovies(snapshot: snapshot);
+                    return CaroselMovies(
+                      listMovies: snapshot.data ?? [],
+                    );
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
@@ -145,7 +188,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text(snapshot.error.toString()),
                     );
                   } else if (snapshot.hasData) {
-                    return CaroselMovies(snapshot: snapshot);
+                    return CaroselMovies(
+                      listMovies: snapshot.data ?? [],
+                    );
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
@@ -207,7 +252,7 @@ class _HomePageState extends State<HomePage> {
         Positioned(
           top: 10,
           left: 30,
-          bottom: 10,
+          bottom: 20,
           child: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -235,7 +280,7 @@ class _HomePageState extends State<HomePage> {
         Positioned(
           top: 10,
           left: 160,
-          bottom: 80,
+          bottom: 50,
           child: SizedBox(
             height: 90,
             width: 200,

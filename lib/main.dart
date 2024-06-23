@@ -2,8 +2,10 @@ import 'package:filmflow/features/app/splash_screen/splash_screen.dart';
 import 'package:filmflow/features/user_auth/pages/login_page.dart';
 import 'package:filmflow/firebase_options.dart';
 import 'package:filmflow/pages/home_page.dart';
+import 'package:filmflow/provider/wathist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +20,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      title: 'Film Flow',
-      home: SplashScreen(
-        child: HomePage(), //LoginPage(), //HomePage(),//da rimettere LogIn()
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WatchlistProvider())
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.dark,
+        title: 'Film Flow',
+        home: SplashScreen(
+          child: HomePage(), //LoginPage(), ,//da rimettere LogIn()
+        ),
       ),
     );
   }

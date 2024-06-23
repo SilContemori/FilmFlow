@@ -1,17 +1,29 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmflow/constants.dart';
+import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:flutter/material.dart';
 
 class CaroselMovies extends StatelessWidget {
-  const CaroselMovies({super.key, required this.snapshot});
+  const CaroselMovies({
+    super.key,
+    required this.listMovies,
+    this.canAutoRepeat,
+  });
 
-  final AsyncSnapshot snapshot;
+  final bool? canAutoRepeat;
+  final List<Movie> listMovies;
+
   @override
   Widget build(BuildContext context) {
+    debugPrint("lenght -----:  ${listMovies.length}");
     return CarouselSlider.builder(
-      itemCount: snapshot.data!.length,
-      options: CarouselOptions(height: 140, viewportFraction: 0.3),
+      itemCount: listMovies.length,
+      options: CarouselOptions(
+          height: 140,
+          viewportFraction: 0.3,
+          enableInfiniteScroll: canAutoRepeat ?? true,
+          initialPage: 0),
       itemBuilder: (context, itemIndex, pageViewIndex) {
         return GestureDetector(
           onTap: () {
@@ -19,7 +31,7 @@ class CaroselMovies extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => DetailsPageMovie(
-                  movie: snapshot.data[itemIndex],
+                  movie: listMovies[itemIndex],
                 ),
               ),
             );
@@ -30,7 +42,7 @@ class CaroselMovies extends StatelessWidget {
             child: Image.network(
               filterQuality: FilterQuality.high,
               fit: BoxFit.cover,
-              '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+              '${Constants.imagePath}${listMovies[itemIndex].posterPath}',
             ),
           ),
         );

@@ -5,6 +5,7 @@ import 'package:filmflow/models/genres_movie.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/movie_videos.dart';
 import 'package:filmflow/pages/search_movie_page.dart';
+import 'package:filmflow/widgets/add_remove_watch_list_btn.dart';
 import 'package:filmflow/widgets/carosel_cast.dart';
 import 'package:filmflow/widgets/carosel_crew.dart';
 import 'package:filmflow/widgets/error_container.dart';
@@ -13,7 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailsPageMovie extends StatefulWidget {
-  const DetailsPageMovie({super.key, required this.movie});
+  const DetailsPageMovie({
+    super.key,
+    required this.movie,
+  });
 
   final Movie movie;
 
@@ -256,9 +260,9 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
           ),
         ),
         Positioned(
-          top: 40,
+          top: 30,
           left: 160,
-          bottom: 70,
+          bottom: 85,
           child: SizedBox(
             height: 90,
             width: 200,
@@ -342,6 +346,14 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
                     },
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    AddRemoveWatchListBtn(
+                      movie: currentMovie,
+                    ),
+                  ],
+                )
               ],
             ),
           ),
