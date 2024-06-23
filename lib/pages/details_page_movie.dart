@@ -262,7 +262,7 @@ class _DetailsPageMovieState extends State<DetailsPageMovie> {
         Positioned(
           top: 30,
           left: 160,
-          bottom: 85,
+          bottom: 70,
           child: SizedBox(
             height: 90,
             width: 200,

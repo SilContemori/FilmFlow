@@ -19,10 +19,12 @@ class CaroselMovies extends StatelessWidget {
     return CarouselSlider.builder(
       itemCount: listMovies.length,
       options: CarouselOptions(
-          height: 140,
-          viewportFraction: 0.3,
-          enableInfiniteScroll: canAutoRepeat ?? true,
-          initialPage: 0),
+        height: 140,
+        viewportFraction: 0.3,
+        enableInfiniteScroll: canAutoRepeat ?? true,
+        // initialPage: canAutoRepeat ? ? 3 : 0
+        // isInWatchList ? " - " : " + "
+      ),
       itemBuilder: (context, itemIndex, pageViewIndex) {
         return GestureDetector(
           onTap: () {

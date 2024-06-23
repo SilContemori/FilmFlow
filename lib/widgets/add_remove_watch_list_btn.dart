@@ -33,16 +33,19 @@ class _AddRemoveWatchListBtnState extends State<AddRemoveWatchListBtn> {
       child: FutureBuilder(
           future: _databaseService.getData(),
           builder: (context, snapshot) {
-            List<Movie> movies =
-                snapshot.data!.docs.map((DocumentSnapshot document) {
+            List<Movie>? movies =
+                snapshot.data?.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
               return Movie.fromJson(data);
             }).toList();
 
+            if (movies == null) {
+              return const SizedBox();
+            }
+
             bool isInWatchList = false;
             for (var elem in movies) {
-              print("elem: $elem");
               if (elem.id == widget.movie.id) {
                 isInWatchList = true;
               }

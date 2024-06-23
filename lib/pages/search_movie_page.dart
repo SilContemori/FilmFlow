@@ -38,6 +38,7 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
                     children: [
                       Expanded(
                         child: SearchBar(
+                          autoFocus: true,
                           controller: searchController,
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                               RoundedRectangleBorder(

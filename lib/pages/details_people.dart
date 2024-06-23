@@ -6,6 +6,7 @@ import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people_description.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:filmflow/pages/search_movie_page.dart';
+import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -271,60 +272,7 @@ class DetailsPeoplePageState extends State<DetailsPeoplePage> {
           List<Movie> list = snapshot.data.cast.where((elemento) {
             return elemento.posterPath != null && elemento.title != null;
           }).toList();
-          return CarouselSlider.builder(
-            itemCount: list!.length,
-            options: CarouselOptions(
-              height: 140,
-              viewportFraction: 0.3,
-            ),
-            itemBuilder: (context, itemIndex, pageViewIndex) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsPageMovie(
-                        movie: list[itemIndex],
-                      ),
-                    ),
-                  );
-                },
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      height: 150,
-                      width: 100,
-                      child: Image.network(
-                        filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
-                        '${Constants.imagePath}${list[itemIndex].posterPath}',
-                      ),
-                    ),
-                    Positioned(
-                      left: 2,
-                      right: 2,
-                      top: 116,
-                      bottom: 2,
-                      child: Container(
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            "${list[itemIndex].title}",
-                            style: GoogleFonts.ebGaramond(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
+          return CaroselMovies(listMovies: list);
         } else {
           return const Center(child: CircularProgressIndicator());
         }

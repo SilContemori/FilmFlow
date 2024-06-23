@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:filmflow/api/api.dart';
 import 'package:filmflow/constants.dart';
+import 'package:filmflow/features/user_auth/pages/login_page.dart';
 import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
@@ -8,6 +9,7 @@ import 'package:filmflow/pages/search_movie_page.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
 import 'package:filmflow/widgets/watchlist_section.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -334,6 +336,7 @@ class _HomePageState extends State<HomePage> {
   AppBar appBar() {
     return AppBar(
       backgroundColor: Colors.black,
+      automaticallyImplyLeading: false,
       title: Text(
         "Film Flow",
         style: GoogleFonts.ebGaramond(
@@ -345,17 +348,27 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: <Widget>[
         IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SearchMoviePage()),
-              );
-            }),
+          icon: const Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchMoviePage()),
+            );
+          },
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            Navigator.pushReplacementNamed(context, '/login');
+          },
+        ),
       ],
     );
   }

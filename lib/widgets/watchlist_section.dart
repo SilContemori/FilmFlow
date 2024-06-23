@@ -18,6 +18,7 @@ class WatchlistSection extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = auth.auth.currentUser;
     final databaseService = DatabaseService(user: user);
+    bool canAutoRepeat = false;
 
     return StreamBuilder(
         stream: databaseService.getMovies(),
@@ -35,6 +36,11 @@ class WatchlistSection extends StatelessWidget {
           if (movies.isEmpty) {
             return const SizedBox();
           }
+          if (movies.length > 4) {
+            canAutoRepeat = true;
+          } else {
+            canAutoRepeat = false;
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,8 +53,8 @@ class WatchlistSection extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
               ),
               SizedBox(
-                  child:
-                      CaroselMovies(listMovies: movies, canAutoRepeat: false)),
+                  child: CaroselMovies(
+                      listMovies: movies, canAutoRepeat: canAutoRepeat)),
             ],
           );
         });
