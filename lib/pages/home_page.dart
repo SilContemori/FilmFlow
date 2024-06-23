@@ -5,13 +5,11 @@ import 'package:filmflow/models/movie.dart';
 import 'package:filmflow/models/people.dart';
 import 'package:filmflow/pages/details_page_movie.dart';
 import 'package:filmflow/pages/search_movie_page.dart';
-import 'package:filmflow/provider/wathist_provider.dart';
 import 'package:filmflow/widgets/carosel_movies.dart';
 import 'package:filmflow/widgets/carosel_people.dart';
+import 'package:filmflow/widgets/watchlist_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -84,36 +82,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-            FutureBuilder(
-              future:
-                  context.read<WatchlistProvider>().setWatchlistFromStorage(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                List<Movie> watchlist =
-                    context.watch<WatchlistProvider>().watchlist;
-                if (watchlist.isEmpty) {
-                  return const SizedBox();
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "My Watchlist",
-                      style: GoogleFonts.ebGaramond(
-                          textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(
-                        child: CaroselMovies(
-                            listMovies: watchlist, canAutoRepeat: false)),
-                  ],
-                );
-              },
-            ),
+            WatchlistSection(),
             const SizedBox(
               height: 10,
             ),
@@ -311,7 +280,6 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       width: 35,
                       height: 35,
-                      // color: Colors.yellow,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.green),
                       child: Center(

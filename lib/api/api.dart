@@ -52,7 +52,7 @@ class Api {
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
       List<Movie> listWithNull = decodedData.map((trending) {
-        return Movie.fromJason(trending);
+        return Movie.fromJson(trending);
       }).toList();
       return listWithNull.where((element) {
         if (element.title == null ||
@@ -77,7 +77,7 @@ class Api {
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
       return decodedData.map((movie) {
-        return Movie.fromJason(movie);
+        return Movie.fromJson(movie);
       }).toList();
     } else {
       throw Exception('Something happend');
@@ -89,24 +89,12 @@ class Api {
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
       return decodedData.map((movie) {
-        return Movie.fromJason(movie);
+        return Movie.fromJson(movie);
       }).toList();
     } else {
       throw Exception('Something happend');
     }
   }
-
-  // Future<List<TvShows>> getTopRatedTvShows() async {
-  //   final response = await http.get(Uri.parse(topRatedTvShows));
-  //   if (response.statusCode == 200) {
-  //     final decodedData = json.decode(response.body)['results'] as List;
-  //     return decodedData.map((tvShows) {
-  //       return TvShows.fromJason(tvShows);
-  //     }).toList();
-  //   } else {
-  //     throw Exception('Something happend');
-  //   }
-  // }
 
   Future<List<People>> getPopularPeople() async {
     final response = await http.get(Uri.parse(popularPeople));
@@ -116,7 +104,7 @@ class Api {
         List<People> result = decodedData.map((people) {
           return People.fromJason(people);
         }).toList();
-        debugPrint("${result.length}");
+
         return result.where((element) {
           if (element.profilePath == null ||
               element.knownForDepartment == null ||
@@ -129,7 +117,6 @@ class Api {
           }
         }).toList();
       } catch (e) {
-        debugPrint("error: $e");
         List<People> result = [];
         return result;
       }
@@ -216,7 +203,6 @@ class Api {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)['results'] as List;
-      // debugPrint("---------------------------------------------$decodedData");
       List<MovieVideos> movieVideosList = decodedData.map((movieVideos) {
         return MovieVideos.fromJason(movieVideos);
       }).toList();
@@ -236,8 +222,6 @@ class Api {
     final responce = await http.get(Uri.parse(url));
     if (responce.statusCode == 200) {
       final decodedData = json.decode(responce.body);
-      debugPrint(
-          "-------------------------------------------------------------$decodedData");
       PeopleDescription peopleDescription =
           PeopleDescription.fromJason(decodedData);
       return peopleDescription;
@@ -251,11 +235,9 @@ class Api {
     if (responce.statusCode == 200) {
       final decodedData = json.decode(responce.body)['results'] as List;
       List<Movie> listWithNull = decodedData.map((list) {
-        return Movie.fromJason(list);
+        return Movie.fromJson(list);
       }).toList();
-      debugPrint(
-          "$decodedData----------------------------------------------------");
-      debugPrint("list num: ${listWithNull.length}");
+
       listWithNull = listWithNull.where((element) {
         if (element.title == null ||
             element.overview == null ||
@@ -269,7 +251,6 @@ class Api {
           return true;
         }
       }).toList();
-      debugPrint("list num: ${listWithNull.length}");
       return listWithNull;
     } else {
       throw Exception('Something happend');

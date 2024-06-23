@@ -7,7 +7,6 @@ class PeopleDescription {
   String? knownForDepartment;
   String? profilePath;
   int id;
-  // List<KnownFor>? knownFor;
 
   PeopleDescription({
     required this.biography,
@@ -18,15 +17,9 @@ class PeopleDescription {
     required this.knownForDepartment,
     required this.profilePath,
     required this.id,
-    // required this.knownFor
   });
 
   factory PeopleDescription.fromJason(Map<String, dynamic> jason) {
-    //QUESTO NON FUNZIONA.... DA DOVE PRENDO KNOWN FOR SE NEL JSON NON C'È
-    // var knownForFromJason = jason["known_for"] as List;
-    // List<KnownFor> knownForList = knownForFromJason
-    //     .map((knownForJson) => KnownFor.fromJason(knownForJson))
-    //     .toList();
     return PeopleDescription(
       biography: jason["biography"],
       birthday: jason["birthday"],
@@ -36,7 +29,6 @@ class PeopleDescription {
       id: jason["id"],
       nome: jason["name"],
       profilePath: jason["profile_path"],
-      // knownFor: knownForList,
     );
   }
 }

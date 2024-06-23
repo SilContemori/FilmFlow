@@ -40,9 +40,6 @@ class _TrailerMovieState extends State<TrailerMovie> {
                 playedColor: Colors.red, handleColor: Colors.red),
           ),
           const PlaybackSpeedButton(),
-          // FullScreenButton(
-            
-          // )
         ],
       ),
     );

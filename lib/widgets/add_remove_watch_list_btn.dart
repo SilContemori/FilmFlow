@@ -1,17 +1,18 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:filmflow/features/user_auth/firebase_auth_services.dart';
 import 'package:filmflow/models/movie.dart';
-import 'package:filmflow/provider/wathist_provider.dart';
+import 'package:filmflow/services/database_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class AddRemoveWatchListBtn extends StatefulWidget {
   AddRemoveWatchListBtn({
     super.key,
     required this.movie,
   });
-
   Movie movie;
 
   @override
@@ -19,28 +20,39 @@ class AddRemoveWatchListBtn extends StatefulWidget {
 }
 
 class _AddRemoveWatchListBtnState extends State<AddRemoveWatchListBtn> {
+  final FirebaseAuthServices auth = FirebaseAuthServices();
+
   @override
   Widget build(BuildContext context) {
-    debugPrint(jsonEncode(widget.movie.toJson()));
+    User? user = auth.auth.currentUser;
+
+    final _databaseService = DatabaseService(user: user);
     return SizedBox(
       width: 90,
       height: 25,
       child: FutureBuilder(
-          future: Movie.isInMyWatchList(widget.movie),
+          future: _databaseService.getData(),
           builder: (context, snapshot) {
-            bool b = snapshot.data ?? false;
+            List<Movie> movies =
+                snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
+              return Movie.fromJson(data);
+            }).toList();
+
+            bool isInWatchList = false;
+            for (var elem in movies) {
+              print("elem: $elem");
+              if (elem.id == widget.movie.id) {
+                isInWatchList = true;
+              }
+            }
             return ElevatedButton(
               onPressed: () async {
-                if (b == true) {
-                  // await Movie.removeMovieFromStorage(widget.movie);
-                  await context
-                      .read<WatchlistProvider>()
-                      .removeMovieFromWatchlist(widget.movie);
+                if (isInWatchList == true) {
+                  _databaseService.deleteMovie(widget.movie.id.toString());
                 } else {
-                  await context
-                      .read<WatchlistProvider>()
-                      .addMovieToWatchlist(widget.movie);
-                  // await Movie.addMovieToStorage(widget.movie);
+                  _databaseService.addMovie(widget.movie);
                 }
 
                 setState(() {});
@@ -58,11 +70,10 @@ class _AddRemoveWatchListBtnState extends State<AddRemoveWatchListBtn> {
                 ),
               ),
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    b ? " - " : " + ",
+                    isInWatchList ? " - " : " + ",
                     style: GoogleFonts.ebGaramond(
                       textStyle: const TextStyle(
                           color: Colors.white,
@@ -71,7 +82,7 @@ class _AddRemoveWatchListBtnState extends State<AddRemoveWatchListBtn> {
                     ),
                   ),
                   Text(
-                    b ? "Remove" : "Watch List",
+                    isInWatchList ? "Remove" : "Watch List",
                     style: GoogleFonts.ebGaramond(
                       textStyle: const TextStyle(
                         color: Colors.white,

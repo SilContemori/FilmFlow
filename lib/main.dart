@@ -12,6 +12,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const App());
 }
 
@@ -29,7 +30,7 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.dark,
         title: 'Film Flow',
         home: SplashScreen(
-          child: HomePage(), //LoginPage(), ,//da rimettere LogIn()
+          child: LoginPage(), 
         ),
       ),
     );

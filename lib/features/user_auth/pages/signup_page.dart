@@ -141,7 +141,6 @@ class _SignUpPageState extends State<SignUpPage> {
       isSigningUp = false;
     });
     if (user != null) {
-      //showToast(message: "User is succesfully create", colors: Colors.green);
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const VerifyEmailPage()));
     } else {

@@ -18,7 +18,6 @@ class Movie {
   Movie({
     required this.title,
     required this.backDropPath,
-    // required this.originalTitle,
     required this.overview,
     required this.posterPath,
     required this.popularity,
@@ -40,12 +39,11 @@ class Movie {
     };
   }
 
-  factory Movie.fromJason(Map<String, dynamic> jason) {
+  factory Movie.fromJson(Map<String, dynamic> jason) {
     return Movie(
         title: jason["title"],
         id: jason["id"],
         backDropPath: jason["backdrop_path"],
-        // originalTitle: jason["original_title"], /// inutile
         overview: jason["overview"],
         posterPath: jason["poster_path"],
         popularity: jason["popularity"]?.toDouble(),
@@ -55,13 +53,11 @@ class Movie {
 
   static Future<List<Movie>> getListMovieFromStorage() async {
     String? jsonString = await SecureStorage().readSecureData(listMoviesKey);
-    debugPrint("--------------------lista get movies------------------");
-    // debugPrint(jsonString);
     if (jsonString == null) {
       return [];
     }
     List<dynamic> listJson = jsonDecode(jsonString);
-    return listJson.map((e) => Movie.fromJason(e)).toList().where((element) {
+    return listJson.map((e) => Movie.fromJson(e)).toList().where((element) {
       if (element.title == null ||
           element.overview == null ||
           element.popularity == null ||
@@ -69,16 +65,6 @@ class Movie {
           element.voteAverage == null ||
           element.backDropPath == null ||
           element.posterPath == null) {
-        debugPrint(element.title);
-        debugPrint(element.overview);
-        debugPrint(element.popularity.toString());
-        debugPrint(element.releaseDate);
-        debugPrint(element.voteAverage.toString());
-        debugPrint(element.backDropPath);
-        debugPrint(element.posterPath);
-
-        // debugPrint(element.title);
-        // debugPrint(element.title);
         return false;
       } else {
         return true;
@@ -101,12 +87,8 @@ class Movie {
 
   static Future<void> removeMovieFromStorage(Movie movie) async {
     List<Movie> list = await Movie.getListMovieFromStorage();
-
     List<Movie> newList = [];
-
-    debugPrint("before : ${list.length.toString()}");
     for (Movie movieElem in list) {
-      debugPrint("elem id : ${movieElem.id}");
       if (movieElem.id != movie.id) {
         newList.add(movieElem);
       }
